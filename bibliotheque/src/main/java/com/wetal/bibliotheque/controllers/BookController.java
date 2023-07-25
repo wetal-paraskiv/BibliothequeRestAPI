@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -66,17 +65,9 @@ public class BookController {
 
    @PostMapping("/update/{id}")
    public ResponseEntity<Book> update(@RequestBody Book book, @PathVariable Long id) {
-      Book bookToUpdate = bookService.bookById(id);
-      if (bookToUpdate != null) {
-         bookToUpdate.setAuthor_id(book.getAuthor_id());
-         bookToUpdate.setGenre_id(book.getGenre_id());
-         bookToUpdate.setTitle(book.getTitle());
-         bookToUpdate.setLanguage_id(book.getLanguage_id());
-         bookToUpdate.setPublisher_id(book.getPublisher_id());
-         LocalDateTime now = LocalDateTime.now();
-         bookToUpdate.setUpdated(now);
-         bookService.update(bookToUpdate);
-         return new ResponseEntity<>(bookToUpdate, HttpStatus.OK);
+      Book updatedBook = bookService.update(book, id);
+      if (updatedBook != null) {
+         return new ResponseEntity<>(updatedBook, HttpStatus.OK);
       }
       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
    }

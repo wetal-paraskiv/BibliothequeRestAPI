@@ -6,6 +6,7 @@ import com.wetal.bibliotheque.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,9 +40,20 @@ public class BookServiceImpl implements BookService {
    }
 
    @Override
-   public Book update(Book book) {
-      bookRepository.save(book);
-      return book;
+   public Book update(Book book, Long id) {
+      Book bookToUpdate = bookRepository.bookById(id);
+      if (bookToUpdate != null) {
+         bookToUpdate.setAuthor_id(book.getAuthor_id());
+         bookToUpdate.setGenre_id(book.getGenre_id());
+         bookToUpdate.setTitle(book.getTitle());
+         bookToUpdate.setLanguage_id(book.getLanguage_id());
+         bookToUpdate.setPublisher_id(book.getPublisher_id());
+         LocalDateTime now = LocalDateTime.now();
+         bookToUpdate.setUpdated(now);
+         bookRepository.save(bookToUpdate);
+         return bookToUpdate;
+      }
+      return null;
    }
 
    @Override
