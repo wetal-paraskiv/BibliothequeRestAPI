@@ -34,12 +34,10 @@ public class Cart {
    @CreationTimestamp
    private LocalDateTime created;
 
-   private String member;
+   @ManyToOne
+   @JoinColumn(name = "member_id")
+   private Member member;
 
-//   @ManyToOne
-//   @JoinColumn(name = "member_id")
-//   private Member member;
-//
    @ManyToMany
    @JoinTable(
       name = "cart_books",

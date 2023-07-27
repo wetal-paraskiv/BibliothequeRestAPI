@@ -1,4 +1,4 @@
-package com.wetal.bibliotheque.service.impl;
+package com.wetal.bibliotheque.service.service_impl;
 
 import com.wetal.bibliotheque.entities.Book;
 import com.wetal.bibliotheque.repositories.BookRepository;
@@ -43,11 +43,11 @@ public class BookServiceImpl implements BookService {
    public Book update(Book book, Long id) {
       Book bookToUpdate = bookRepository.bookById(id);
       if (bookToUpdate != null) {
-         bookToUpdate.setAuthor_id(book.getAuthor_id());
-         bookToUpdate.setGenre_id(book.getGenre_id());
+         bookToUpdate.setAuthors(book.getAuthors());
+         bookToUpdate.setGenre(book.getGenre());
          bookToUpdate.setTitle(book.getTitle());
-         bookToUpdate.setLanguage_id(book.getLanguage_id());
-         bookToUpdate.setPublisher_id(book.getPublisher_id());
+         bookToUpdate.setLanguage(book.getLanguage());
+         bookToUpdate.setPublisher(book.getPublisher());
          LocalDateTime now = LocalDateTime.now();
          bookToUpdate.setUpdated(now);
          bookRepository.save(bookToUpdate);
