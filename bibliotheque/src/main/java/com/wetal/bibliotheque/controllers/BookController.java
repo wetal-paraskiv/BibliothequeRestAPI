@@ -31,6 +31,11 @@ public class BookController {
       return ResponseEntity.ok(bookService.filterBooks(query));
    }
 
+   @GetMapping("/available")
+   public List<Book> availableBooks() {
+      return bookService.availableBooks();
+   }
+
    @GetMapping("/all")
    public ResponseEntity<List<Book>> all() {
       return ResponseEntity.ok(bookService.allBooks());

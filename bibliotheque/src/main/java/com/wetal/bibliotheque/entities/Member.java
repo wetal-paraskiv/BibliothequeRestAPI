@@ -1,5 +1,7 @@
 package com.wetal.bibliotheque.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Setter
 @Getter
@@ -33,8 +35,12 @@ public class Member {
    private String email;
    private String phone;
 
+   @JsonIdentityInfo(
+      scope = Member.class,
+      generator = ObjectIdGenerators.PropertyGenerator.class,
+      property = "id")
    @OneToMany(mappedBy = "member")
-   private Set<Cart> memberCarts;
+   private List<Cart> carts;
 
    @CreationTimestamp
    private LocalDateTime created;

@@ -8,6 +8,8 @@ public interface BookService {
 
    List<Book> filterBooks(String query);
 
+   List<Book> availableBooks();
+
    List<Book> allBooks();
 
    Book addNew(Book book);

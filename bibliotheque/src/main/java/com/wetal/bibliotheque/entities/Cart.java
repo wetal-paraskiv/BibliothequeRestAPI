@@ -1,5 +1,7 @@
 package com.wetal.bibliotheque.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Setter
 @Getter
@@ -38,10 +40,14 @@ public class Cart {
    @JoinColumn(name = "member_id")
    private Member member;
 
+   @JsonIdentityInfo(
+      scope = Cart.class,
+      generator = ObjectIdGenerators.PropertyGenerator.class,
+      property = "id")
    @ManyToMany
    @JoinTable(
-      name = "cart_books",
+      name = "cart-books",
       joinColumns = @JoinColumn(name = "cart_id"),
       inverseJoinColumns = @JoinColumn(name = "book_id"))
-   private Set<Book> cart_books;
+   private List<Book> cartBooks;
 }

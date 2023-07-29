@@ -1,6 +1,7 @@
 package com.wetal.bibliotheque.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,10 @@ public class Author {
    private String firstName;
    private String lastName;
 
-   @JsonBackReference
+   @JsonIdentityInfo(
+      scope = Author.class,
+      generator = ObjectIdGenerators.PropertyGenerator.class,
+      property = "id")
    @ManyToMany(mappedBy = "authors")
    public List<Book> books = new ArrayList<>();
 }

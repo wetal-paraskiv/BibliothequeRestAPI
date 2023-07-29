@@ -2,6 +2,7 @@ package com.wetal.bibliotheque.controllers;
 
 import com.wetal.bibliotheque.entities.Genre;
 import com.wetal.bibliotheque.service.GenreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,7 @@ public class GenreController {
 
    private final GenreService genreService;
 
+   @Autowired
    public GenreController(GenreService genreService) {
       this.genreService = genreService;
    }
