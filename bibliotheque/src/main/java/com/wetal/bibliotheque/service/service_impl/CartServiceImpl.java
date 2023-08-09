@@ -2,9 +2,10 @@ package com.wetal.bibliotheque.service.service_impl;
 
 import com.wetal.bibliotheque.entities.Book;
 import com.wetal.bibliotheque.entities.Cart;
+import com.wetal.bibliotheque.entities.Register;
 import com.wetal.bibliotheque.repositories.BookRepository;
 import com.wetal.bibliotheque.repositories.CartRepository;
-import com.wetal.bibliotheque.service.BookService;
+import com.wetal.bibliotheque.repositories.RegisterRepository;
 import com.wetal.bibliotheque.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class CartServiceImpl implements CartService {
 
    private final CartRepository cartRepository;
    private final BookRepository bookRepository;
+   private final RegisterRepository registerRepository;
 
    @Autowired
-   public CartServiceImpl(CartRepository cartRepository, BookRepository bookRepository) {
+   public CartServiceImpl(CartRepository cartRepository, BookRepository bookRepository, RegisterRepository registerRepository) {
       this.cartRepository = cartRepository;
       this.bookRepository = bookRepository;
+      this.registerRepository = registerRepository;
    }
 
    @Override
@@ -40,7 +43,12 @@ public class CartServiceImpl implements CartService {
          book.setAvailable(false);
          bookRepository.save(book);
       }
-      return cartRepository.save(cart);
+      cartRepository.save(cart);
+      Register register = new Register();
+      register.setCart(cart);
+      register.setDue(true);
+      registerRepository.save(register);
+      return cart;
    }
 
    @Override

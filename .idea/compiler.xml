@@ -10,7 +10,7 @@
         <module name="bibliotheque" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17">
       <module name="bibliotheque" target="17" />
     </bytecodeTargetLevel>
   </component>

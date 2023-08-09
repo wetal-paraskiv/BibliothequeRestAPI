@@ -1,4 +1,4 @@
-package com.wetal.bibliotheque.config;
+package com.wetal.bibliotheque.w_security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +17,10 @@ public class SecurityConfig {
       return httpSecurity
          .csrf(csrf -> csrf.disable())
          .authorizeHttpRequests(auth -> {
-            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/home")).permitAll();
-//            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/books")).permitAll();
-            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/books/all")).permitAll();
-            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/books/search")).permitAll();
 //            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/home")).permitAll();
-//            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/user")).permitAll();
+//            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/books/all")).permitAll();
+//            auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/books/search")).permitAll();
+            auth.requestMatchers("home", "/api/books/all", "/api/books/search").permitAll();
 //            auth.requestMatchers("/admin").hasRole("ADMIN");
 //            auth.requestMatchers("/user").hasRole("USER");
             auth.anyRequest().authenticated();

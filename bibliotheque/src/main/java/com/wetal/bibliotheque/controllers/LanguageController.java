@@ -2,6 +2,7 @@ package com.wetal.bibliotheque.controllers;
 
 import com.wetal.bibliotheque.entities.Language;
 import com.wetal.bibliotheque.service.LanguageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/languages")
+@Slf4j
 public class LanguageController {
 
    private final LanguageService languageService;
@@ -27,6 +29,7 @@ public class LanguageController {
 
    @GetMapping("/all")
    public ResponseEntity<List<Language>> all() {
+      log.info("An INFO Message: requested all repository languages... :)");
       return ResponseEntity.ok(languageService.allLanguages());
    }
 
